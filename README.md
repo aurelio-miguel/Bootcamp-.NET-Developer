@@ -7,8 +7,8 @@ Este é um repositório pessoal/público, ele está aberto a contribuições.
 Todos os conteúdos estão organizados em pastas, será possível visualizar cada um dos módulos e cada um dos cursos, seguindo a organização das pastas. Cada módulo estará em uma das pastas da raiz do repositório, cada curso vai estar unificado em um arquivo markdown, com os seu respectivo nome.
 
 ## Evolução
-- **Último curso concluído:** Introdução do .NET;
-- **Curso em andamento:** Introdução as IDEs e Configuração de Ambiente .NET.
+- **Último curso concluído:** Introdução as IDEs e Configuração de Ambiente .NET;
+- **Curso em andamento:** Sintaxe e Tipos de Dados em C#
 
 ### Link para o Bootcamp
 
