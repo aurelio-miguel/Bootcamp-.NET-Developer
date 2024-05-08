@@ -143,3 +143,118 @@ Posição Nº2: 21
 
 Com o FOREACH nós podemos evitar erros de excessão e não temos a necessidade de usar os colchetes para acessar as posições sendo gerenciados por um contator, assim como ocorre no FOR.
 
+## Redimensionando um array
+O array já é definido com o seu tamanho pré-determinado e não é possível aumentar ou diminuir o tamanho de um array no percurso do desenvolvimento. 
+
+Existe uma alternativa para poder mudar o tamanho de um array que é utilizando a classe `Array` e a sua função `Resize()`;
+
+Segue abaixo um trecho de código com a estrutura para o redimensionamento:
+```
+Array.Resize(ref nomeDoArray, nomeDoArray.Length * 2);
+```
+Perceba que o primeiro parâmetro da função **Resize** pede o array por referência, isso é feito pois o primeiro parâmetro da função não vai receber o valor do array e sim o endereço da memória do array. O segundo parâmetro é o novo tamanho do nosso array, o novo tamanho sempre deve ser inserido como inteiro, nesse caso utilizamos o comando `nomeDoArray.Length * 2` para pegarmos o tamanho do array através do `.Length` e multiplicar esse tamanho por 2. Dessa forma conseguimos dobrar o tamanho do array.
+
+O mesmo processo pode ser feito para diminuir o tamano do array, ao diminuir o tamanho de um array ocorre a perda dos valores a partir da última posição.
+
+Internamente a função **Resize()** cria uma cópia do array que você deseja alterar e insere ela em um novo array com o tamanho maior e também copia todos os valores e insere no novo array. Por isso que no primeiro parâmetro é passado a referência do local da memória onde se encontra o array previamente criado.
+
+## Copiando um Array para outro
+É possível copiar um array e inserir ele dentro de outro array, podemos fazer isso através da função array da classe resize ou podemos fazer isso manualmente. Podemos por exemplo copiar um array menor e inserir em um array maior, podemos fazer também o contrário.
+
+Segue abaixo um trecho de código com um exemplo para isso:
+```
+//Criando o primeiro array e inserindo os dados
+int[] array1 = new int[3];
+
+array1[0] = 57;
+array1[1] = 33;
+array1[2] = 21;
+
+//Criando o segundo array
+int[] array2 = new int[array1.Length * 2];
+
+//Copiando os dados do array1 para o array2
+Array.Copy(array1, array2, array1.Length);
+```
+
+**Etapas:**
+- Criando o primeiro array e inserindo os dados: Nessa etapa foi criado o primeiro array e os dados foram inseridos, conforme já ensinado nesse material.
+
+- Criando o segundo array: Nessa etapa criamos um novo array chamado *array2* e definimos o tamanho como `array1.Length * 2`, dessa forma pegamos o tamanho do array1 com o `Length` e multiplicamos por 2. O array2 vai ter o tamanho do array 1 x 2;
+
+- Copiando os dados do array1 para o array2: Através da função `Copy()` da classe `Array` nós inserimos como primeiro parâmetro o array de origem, no segundo parâmetro foi indicado o array que vai receber os dados e no terceiro parâmetros foi passado qual a quantidade que deveria ser copiado, nesse exemplo todos os dados do array1 foram copiados passando o comando `array1.Length`. Nessa terceiro parâmetro podemos passar apenas a quantidade que desejarmos.
+
+## Trabalhando com Listas
+Uma lista possui a capacidade de armezenar uma coleção de objetos do mesmo tipo, porém, sem toda a complexidade de um array. Por exemplo, o array obriga a definição do tamanho dele, já a lista não possui essa obrigatóriedade, além disso o redimensionamento pode ser feito de forma mais facilitada. 
+
+A lista pode aumentar a sua capacidade conforme vamos inserindo elementos nela. Não é preciso realizar o gerenciamento de tamanho ou se preocupar com a capacidade máxima da lista, algo que era necessário nos arrays.
+
+### Estrutura de criação da lista
+Paa realizar a criação da lista, basta seguir a estrutura abaixo:
+```
+List<string> nomeLista = new List<string>();
+```
+A criação da string é iniciada com a classe `List<string>` para que possamos criar uma lista de strings, o tipo da lista é inserido dentro do sinal de maior e menos e o nome da variável é inserida após o sinal de maior, conforme o padrão de criação de variáveis. Após isso é definido o nome da variável e é inserido o operador de atribuição para realizar a declaração. Após o indicador de atribuição a lista é inmplementada através do comando `new List<string>();` nessa implementação também é passada o tipo da variável.
+
+Não é preciso passar uma capacidade para a lista, por isso que não tem nenhum valor inserido dentro das parenteses. 
+
+Após a implementação da lista, ela se torna uma instãncia da classe List. Dessa forma podemos trabalhar com diversas funções que essa classe possui.
+
+### Inserindo elementos na lista
+Para trabalhar com a lista podemos utilizar os métodos da classe List após a sua criação. Para inserir um novo elemento, podemos utilizar as funções *Add()* ou *AddRange* para inserir mais de um elemento.
+
+Segue abaixo um exemplo de inserção na lista
+```
+List<string> listaString = new List<string>();
+
+listaString.Add("TO");
+listaString.Add("SP");
+listaString.Add("BA");
+```
+
+### Percorrendo uma lista
+Para percorrer uma lista podemos utilizar o FOR ou o FOREACH, da mesma forma que foi exemplificado na criação do array. A única diferença é que nas listas não temos o *.Length* para capturar o tamanho, para listas devemos utilizar o *.Count*.
+
+Percorrendo a lista com o FOR:
+```
+for (int contador = 0; contador < listaString.Count; contador++)
+{
+    Console.WriteLine($"Posição Nº{contador}: {listaString[contador]}");
+}
+
+Output:
+Posição Nº0: TO
+Posição Nº1: SP
+Posição Nº2: BA
+```
+
+Percorrendo a lista com o FOREACH:
+```
+int contador = 0;
+foreach (string valor in listaString)
+{
+    Console.WriteLine($"Posição Nº{contador}: {valor}");
+    contador++;
+}
+
+Output:
+Posição Nº0: TO
+Posição Nº1: SP
+Posição Nº2: BA
+```
+A variável de contador não é obrigatória para o foreach, utilizei apenas para exemplificação.
+
+### Removendo um elemento da lista
+Para remover um elemento da lista, podemos utilizar a função `Remove(item)` da lista criada.
+
+Segue abaixo um trecho de código que exemplifica esse processo:
+```
+List<string> listaString = new List<string>();
+
+listaString.Add("TO");
+listaString.Add("SP");
+listaString.Add("BA");
+
+listaString.Remove("SP");
+```
+Além de remover, a função também reorganiza as posições da lista e o tamanho para que o espaço removido não fique em branco
