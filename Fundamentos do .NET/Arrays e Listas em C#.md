@@ -258,3 +258,5 @@ listaString.Add("BA");
 listaString.Remove("SP");
 ```
 Além de remover, a função também reorganiza as posições da lista e o tamanho para que o espaço removido não fique em branco
+
+
