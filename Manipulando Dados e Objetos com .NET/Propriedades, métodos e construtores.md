@@ -284,3 +284,117 @@ public class Curso
 }
 ```
 Nós sabemos que essa estrutura é um método por conta da sua assinatura, a assinatura é algo que torna esse método algo único. No exemplo acima a assinatura é o trecho `void AdicionarAluno()`, o comando void significa que esse método não terá nenhum retorno e após ele nós devemos inserir o nome do método com Pascal Case e devemos inserir os parenteses para que possamos possibilitar a insersão dos parâmetros, se for algo necessário para o método. 
+
+### Tipos de retorno
+Os métodos podem ter diversos tipos de retorno. Para exemplificar isso iremos criar um método para retornar a quantidade de alunos matriculados no curso.
+
+Segue abaixo o trecho de código em que criamos o método na arquivo **Curso.cs** da classe Curso:
+
+```
+public int ObterQuantidadeDeAlunosMatriculados()
+{
+    int quantidade = Alunos.Count;
+    return quantidade;
+}
+```
+Na assinatura desse método podemos visualizar que temos o tipo `int`, isso significa que esse nosso método terá um retorno do tipo inteiro. Sempre que um método tiver um retorno, precisamos inserir o tipo de retorno na assinatura e obrigatoriamente esse método precisará ter um retorno com o mesmo tipo de dado que foi declarado na assinatura. Através do `return ...;` retornaremos o valor inteiro desejado.
+
+### Implementando o método para remover
+Agora iremos criar um método para remover um aluno da lista. Esse método em específico não terá nenhum retorno, assinaremos ele com o retorno `void`. Esse método será inserido na classe Curso.
+
+Segue abaixo um trecho de código exemplificando esse método:
+```
+...
+public void RemoverAluno(Pessoa aluno)
+{
+    Alunos.Remove(aluno);
+}
+```
+Para que possamos saber qual aluno deve ser removido, foi passado por parâmetro uma variável que será utilizada no escopo desse método com o tipo **Pessoa**. Dentro desse método foi inserido o comando `Alunos.Remove(aluno)` para remover o aluno da lista de alunos previamente criada.
+
+### Implementando o método para listar os alunos
+Nesta etapa iremos criar um método para listar todos os alunos. O objetivo desse método será listar o nome completo de todos os alunos matriculados
+
+Segue abaixo o trecho de código onde realizamos a criação do método para listar os alunos. Para exibir o nome utilizamos o método WriteLine da classe Console.
+```
+Public void ListarAlunos()
+{
+    foreach (Pessoa aluno in Alunos)
+    {
+        Console.WriteLine($"Aluno: {aluno.NomeCompleto}");
+    }
+}
+```
+Nesse método trabalhamos com o `foreach` para listar todos os alunos inseridos na lista Alunos. Acessamos o nome completo através da propriedade `NomeCompleto` de cada um dos alunos, essa propriedade foi criada na classe Pessoa do arquivo **Pessoa.cs**.
+
+### Instânciando a classe Curso e trabalhando com ela
+Agora iremos instânciar a classe Curso no arquivo **Program.cs** para que possamos trabalhar com ela. 
+
+Para instânciar a classe utilizaremos o trecho de código abaixo:
+```
+//Instânciando a classe Pessoa para a criação do p1 e p2
+
+Pessoa p1 = new Pessoa();
+p1.Nome = "Aurélio";
+p1.Sobrenome = "Miguel";
+p1.Idade = 26;
+
+Pessoa p2 = new Pessoa();
+p2.Nome = "Leonardo";
+p2.Sobrenome = "Campos";
+p2.Idade = 25;
+
+//Instânciando a classe Curso para inserir os dados do curso e utilizar o método ListarAlunos para exibir os dois alunos inseridos.
+
+Curso cursoDeIngles = new Curso();
+cursoDeIngles.Nome = "Curso de Inglês";
+cursoDeIngles.Alunos = new List<Pessoa>();
+
+cursoDeIngles.AdicionarAluno(p1);
+cursoDeIngles.AdicionarAluno(p2);
+
+cursoDeIngles.ListarAlunos();
+```
+Após intânciar a classe Curso, foi necessário criar uma nova lista de alunos vazia para que posteriormente possam ser inseridos os elementos. Sempre que se tratar de uma lista, antes é necessário realizar a criação dela vazia. Esse procedimento foi feito na linha `cursoDeIngles.Alunos = new List<Pessoa>();`. Isso foi necessário pois na classe Curso, a propriedade Alunos é também uma lista.
+
+Após isso foi inserido os alunos utilizando o método `AdicionarAluno(aluno)` para inserir os alunos na lista. O método `ListarAlunos();` é responsável pela exibição dos alunos que foram cadastrados.
+
+## Trabalhando com construtores
+Os construtores permitem que o programador defina valores padrão, limite a instanciação e grave códigos flexíveis e fácil de ler. O construtor permite que possamos instânciar uma classe e iniciar ela com valores padrão no momento da instânciação. Os construtores são sempre recomendados para a instânciação da nossa classe. 
+
+### Criando um construtor para a classe Pessoa
+O primeiro passo vai ser criar um construtor para a classe pessoa. Para isso, realizaremos a implementação do trecho de código abaixo na classe Pessoa:
+```
+public class Pessoa
+{
+    public Pessoa()
+    {
+
+    }
+    public Pessoa(string nome, string sobrenome, int idade)
+    {
+        Nome = nome;
+        Sobrenome = sobrenome;
+        Idade = idade;
+    }
+
+    ...
+}
+```
+
+Por convenção, o construtor é inserido logo no inicio do escopo da classe. Todo construtor deve ter o mesmo nome da classe e ele também não possui um tipo de retorno. O construtor pode ser vazio ou ele também pode receber parâmetros, os parâmetros serão para que possamos popular as propriedades da nossa classe. Nos parâmetros foi inserido o tipo do parâmetro e a variável que vai ser utilizada para que possamos atribuir a propriedade, dentro do escopo do nosso construtor.
+
+Para que possamos ter a possibilidade de instânciar a classe Pessoa sem inserir inicialmente os parâmetros, realizamos a criação de mais um construtor sem os parâmetros, dessa forma podemos instânciar a classe no arquivo **Program.cs** como `new Pessoa();` ou como `new Pessoa(valores_aqui);`. Esses dois construtores são importantes para os casos em que precisaremos instânciar a classe tendo as informações previamente ou mesmo não tendo ainda os dados das propriedades.
+
+Dessa forma teremos um construtor que não vai receber nada e teremos também um construtor que receberá os dados das propriedades.
+
+### Instânciando a classe Pessoa
+Agora com os dois construtores criados, poderemos instânciar a classe Pessoa de forma vazia ou já inserido as informações através do construtor no nosso arquivo **Program.cs**, conforme o trecho de código abaixo:
+```
+Pessoa p1 = new Pessoa();
+p1.Nome = "Aurélio";
+p1.Sobrenome = "Miguel";
+p1.Idade = 26;
+
+Pessoa p2 = new Pessoa("Leonardo", "Campos", 25);
+```
