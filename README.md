@@ -7,8 +7,8 @@ Este é um repositório pessoal/público, ele está aberto a contribuições.
 Todos os conteúdos estão organizados em pastas, será possível visualizar cada um dos módulos e cada um dos cursos, seguindo a organização das pastas. Cada módulo estará em uma das pastas da raiz do repositório, cada curso vai estar unificado em um arquivo markdown, com os seu respectivo nome.
 
 ## Evolução
-- **Último curso concluído:** Exceções e Coleções com C#;
-- **Curso em andamento:** Tuplas, Operador Ternário e Desconstrução de um Objeto com C#;
+- **Último curso concluído:** Tuplas, Operador Ternário e Desconstrução de um Objeto com C#;
+- **Curso em andamento:** Nuget, Serializer e Atributos no C#;
 
 ### Link para o Bootcamp
 
