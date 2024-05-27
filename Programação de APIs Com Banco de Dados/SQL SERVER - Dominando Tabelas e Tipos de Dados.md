@@ -159,3 +159,80 @@ Para utilizar o INSERT omitindo as colunas, podemos seguir o padrão do trecho d
 INSERT INTO Clientes VALUES('Leonardo', 'Buta', 'email@email.com', 1, GETDATE())
 ```
 Dessa forma foi omitido o nome das colunas e os valores serão inseridos conforme a sequência padrão das colunas da tabela **Clientes**.
+
+## Entendendo o Id
+Percebam que no nosso INSERT, não foi passado a coluna Id. Isso ocorre pois o Id é um número de identificação que foi inserido no momento de criação da nossa tabela. O Id foi cadastrado como identity e auto-incremental, isso significa que ele vai se inserir de forma automática sempre que um novo dado for inserido na tabela e o valor dele vai incrementando todas as vezes que algum dado for inserido. 
+
+Esse Id é o identificador único da linha, não podendo se repetir. 
+
+## Realizando um Update
+Agora vamos ver como podemos atualizar um registro que já está inserido no nosso banco de dados através do UPDATE, por exemplo, podemos utilizar o UPDATE para atualizar o e-mail de um determinado cliente.
+
+Segue abaixo um trecho de código exemplificando esse processo:
+```
+UPDATE Clientes
+SET Email = 'email@atualizado.com'
+WHERE Id = 3
+```
+No comando acima utilizamos o UPDATE para indicar que era uma atualização e após isso indicamos em qual base de dados a atualização deveria ocorrer. Após isso, utilizamos o trecho `SET Email = 'novo_valor'` para indicar qual coluna será atualizada e o valor que deverá ser inserido nela, logo após utilizamos o WHERE para indicar que deverá atualizar a linha que tiver o Id igual a 3.
+
+Sempre que for utilizar um update é uma boa prática utilizar o Id para identificar qual linha deve ser atualizada, pois o Id é único e não ocorre o risco de atualizar mais de uma linha de forma indesejada.
+
+Para atualizar mais de um campo, basta separar as colunas e novos valores por vírgula, por exemplo `SET Email = 'novo_email', AceitaComunicados= 0 ...`
+O UPDATE sem o WHERE é um grande risco, executar o update sem uma condição vai fazer com que todas as linhas do banco de dados sejam atualizadas. 
+
+## Deletando um registro
+Agora vamos aprender a deletar um registro na nossa tabela. Para deletar um registro do banco de dados, basta seguir o exemplo abaixo:
+```
+DELETE Clientes
+WHERE Id = 5
+```
+No exemplo acima deletamos a linha do cliente que possui o Id igual a 5. 
+
+Se inserir o DELETE sem o WHERE, todas as linhas do banco de dados serão removidas.
+
+## Criação de uma tabela
+Utilizando o SQL também podemos realizar a criação de uma tabela.
+
+Segue abaixo a estrutura de criação de uma tabela:
+```
+CREATE TABLE nome_tabela(
+    Id int IDENTITY (1,1) NOT NULL,
+    Nome varchar(255) NULL,
+    Sobrenome varchar(255) NULL,
+    Email varchar (255) NULL,
+    AceitaComunicados bit NULL,
+    DataCadastro datetime2(7) null
+)
+```
+Para a criação da tabela, utilizamos o comando `CREATE TABLE` seguido pelo nome da tabela. Após isso inserimos o nome dos campos dentro dos parênteses seguido pelo tipo de dado que vai conter naquele campo e o tamanho do campo, ainda na definição do campo inserimos o `NOT NULL` para campos que não podem ser vazios ou inserimos o `NULL` para campos que podem ser vazios.
+
+Perceba que o Id possui uma estrutura diferente dos outros, isso ocorre por ele ser um identificado, por isso foi utilizado o `IDENTITY`
+
+## Tipos de dados
+No banco de dados as colunas podem ter vários tipos diferentes.
+
+Segue abaixo uma imagem com os tipos de dados para texto. Normalmente as mais utilizadas são o tipo **char** e o **varchar** sendo o mais utilizado para esse tipo de texto.
+![Imagem com os tipos de dados](/imagens/tipos%20de%20dados.png)
+
+Segue abaixo uma tabela com os tipos numéricos:
+
+![Imagem com os tipos de dados numéricos](/imagens/tipos%20numerico%20bd.png)
+Além desses tipos numéricos temos também o float
+
+Segue abaixo uma imagem com os tipos de dados para data e hora:
+
+![Imagem com os tipos de dados para datas](/imagens/tipos%20de%20dados%20para%20datas%20no%20bd.png)
+
+## Criando uma nova tabela
+Agora vamos criar uma nova tabela para armazenar produtos, para isso vamos seguir o trecho de código abaixo para realizar a criação:
+```
+CREATE TABLE Produtos(
+	Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
+	Nome varchar (255) NOT NULL,
+	Cor varchar (50) NULL,
+	Preco decimal (13,2) NULL,
+	Tamanho varchar (5) NULL,
+	Genero char (1) NULL
+)
+```
